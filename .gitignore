@@ -1,4 +1,5 @@
 /node_modules
+.idea
 /public/hot
 /public/storage
 /storage/*.key
@@ -10,3 +11,12 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+_lighthouse_ide_helper.php
+_ide_helper.php
+programmatic-types.graphql
+
+graphql/schema-directives.graphql
+
+public/js/app.js
+public/css/app.css
