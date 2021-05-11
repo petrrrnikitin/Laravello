@@ -46,6 +46,7 @@
 import Login from './graphql/Auth.gql'
 import {gqlErrors} from "./utils";
 import Errors from "./components/Errors";
+import store from "./vuex.config";
 
 export default {
     name: "Login",
@@ -68,7 +69,9 @@ export default {
                         email: this.email,
                         password: this.password
                     }
-                })
+                });
+                this.$store.dispatch('setLoggedIn', true);
+                this.$router.push({name: "board"});
             } catch (error) {
                 this.errors = gqlErrors(error);
             }

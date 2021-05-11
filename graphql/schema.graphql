@@ -10,7 +10,8 @@ scalar DateTimeTz @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Da
 type Query {
     users: [User!]! @paginate(defaultCount: 10)
     user(id: ID @eq): User @find
-    board(id: ID! @eq): Board @find @guard(with: "sanctum")
+    board(id: ID! @eq): Board @find
+    me: User @auth
 }
 
 type Mutation {

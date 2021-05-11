@@ -3,7 +3,16 @@
         <div class="text-white h-10 flex justify-between items-center mb-2 bg-purple-600">
             <div class="ml-2 w-1/3">X</div>
             <div class="text-lg opacity-50 cursor-pointer hover:opacity-75">Laravello</div>
-            <div class="mr-2 w-1/3 flex justify-end">X</div>
+            <div class="mr-2 w-1/3 flex justify-end">
+                <div v-if="isLoggedIn" class="flex items-center">
+                    <div class="text-sm mr-2"> {{ name }}</div>
+                    <button @click="logout" class="header-btn">Log out</button>
+                </div>
+                <div v-else>
+                    <button class="header-btn" @click="$router.push({name: 'login'})">Sign-in</button>
+                    <button class="header-btn" @click="$router.push({name: 'register'})">Register</button>
+                </div>
+            </div>
         </div>
 
         <div class="h-full flex flex-1 flex-col items-stretch">
@@ -26,11 +35,17 @@
 <script>
 import List from "./components/List";
 import BoardQuery from './graphql/BoardWithListsAndCards.gql'
+import Logout from './graphql/Logout.gql'
 import {EVENT_CARD_ADDED, EVENT_CARD_DELETED, EVENT_CARD_UPDATED} from "./constants";
+import {mapState} from 'vuex';
 
 
 export default {
     components: {List},
+    computed: mapState({
+        isLoggedIn: "isLoggedIn",
+        name: state => state.user.name
+    }),
     apollo: {
         board: {
             query: BoardQuery,
@@ -40,6 +55,14 @@ export default {
         }
     },
     methods: {
+        async logout() {
+            const response = await this.$apollo.mutate({
+                mutation: Logout,
+            });
+            if (response.data?.logout.id) {
+                this.$store.dispatch("logout");
+            }
+        },
         updateQueryCache(event) {
             const data = event.store.readQuery({
                 query: BoardQuery,
