@@ -29,6 +29,7 @@ return [
          * make sure to return spec-compliant responses in case an error is thrown.
          */
         'middleware' => [
+
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Nuwave\Lighthouse\Support\Http\Middleware\AcceptJson::class,
@@ -37,6 +38,7 @@ return [
             // middleware, this delegates auth and permission checks to the field level.
             \Nuwave\Lighthouse\Support\Http\Middleware\AttemptAuthentication::class,
         ],
+
 
         /*
          * The `prefix` and `domain` configuration options are optional.
