@@ -10,8 +10,8 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 <body class="h-screen text-gray-800">
-    <div class="h-full" id="app">
-        <router-view></router-view>
-    </div>
+<div class="h-full" id="app">
+    <router-view></router-view>
+</div>
 </body>
 </html>

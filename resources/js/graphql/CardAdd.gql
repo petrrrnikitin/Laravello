@@ -1,7 +1,10 @@
-mutation CardAdd($list_id: ID!, $title: String!, $order: Int!) {
-    cardAdd(input: {title: $title, list_id: $list_id, order: $order, owner_id: 1}) {
+mutation CardAdd($list_id: ID!, $title: String!, $order: Int!, $owner_id: Int!) {
+    cardAdd(input: {title: $title, list_id: $list_id, order: $order, owner_id: $owner_id}) {
         id
         title
         order
+        owner {
+            id
+        }
     }
 }

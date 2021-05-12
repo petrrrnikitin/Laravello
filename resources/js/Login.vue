@@ -63,15 +63,18 @@ export default {
             this.errors = [];
 
             try {
-                await this.$apollo.mutate({
+                const user = await this.$apollo.mutate({
                     mutation: Login,
                     variables: {
                         email: this.email,
                         password: this.password
                     }
                 });
-                this.$store.dispatch('setLoggedIn', true);
-                this.$router.push({name: "board"});
+                if (user.data?.login) {
+                    this.$store.commit('setUser', user.data.login);
+                    this.$store.dispatch('setLoggedIn', true);
+                    this.$router.push({name: "board"});
+                }
             } catch (error) {
                 this.errors = gqlErrors(error);
             }
